@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     private Player_Inputs playerInputs;
     public static InputManager _INPUT_MANAGER;
     private float timeSinceJumppPressed = 0f;
-    private Vector2 leftAxisValue = Vector2.zero;
+    public Vector2 leftAxisValue = Vector2.zero;
 
     private void Awake()
     {
