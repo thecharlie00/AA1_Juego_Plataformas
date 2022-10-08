@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
     public float timePassed;
     public float timeToMaxSpeed;
     public float speed;
+    public float initSpeed;
+
     public float maxSpeed;
-    public bool isMaxSpeed;
+    public bool isMoving;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,19 +25,58 @@ public class Player : MonoBehaviour
         }
         if(InputManager._INPUT_MANAGER.leftAxisValue.y > 0)
         {
-            if (!isMaxSpeed)
-            {
-                timePassed += Time.deltaTime;
-                speed = acceleration * timePassed / Time.deltaTime;
-            }
+            isMoving = true;
+            timePassed += Time.deltaTime;
+            speed = acceleration * timePassed / Time.deltaTime;
+
+
+            speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
             if (speed == maxSpeed)
             {
-                isMaxSpeed = true;
                 speed = maxSpeed;
             }
 
+
             Vector3 newPosition = transform.position + (transform.forward * (speed * Time.fixedDeltaTime));
             rb.MovePosition(newPosition);
+
+        }
+        if(InputManager._INPUT_MANAGER.leftAxisValue.y <= 0 )
+        {
+           
+            
+                
+                isMoving = false;
+            
+        }
+        if(InputManager._INPUT_MANAGER.leftAxisValue.y < 0)
+        {
+            isMoving = true;
+            timePassed += Time.deltaTime;
+            speed = acceleration * timePassed / Time.deltaTime;
+
+
+            speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
+            if (speed == maxSpeed)
+            {
+                speed = maxSpeed;
+            }
+
+
+            Vector3 newPosition = transform.position + (transform.forward * (-1*speed * Time.fixedDeltaTime));
+            rb.MovePosition(newPosition);
+        }
+        if (!isMoving && speed >0)
+        {
+            
+                speed-=Time.deltaTime*2;
+                Vector3 newPosition = transform.position + (transform.forward * (speed * Time.fixedDeltaTime));
+                rb.MovePosition(newPosition);
+            if(speed <= 0)
+            {
+                speed = 0;
+            }
+            
             
         }
        
