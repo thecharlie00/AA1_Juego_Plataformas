@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2cad066784c7742951da9579cdc515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraMovementSpeed: 10
+  cameraMovementSpeed: 2
 --- !u!1 &1811897260
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e46352bc2259e4993ffa96f09c52d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Camera: {fileID: 1125839986}
   acceleration: 2
   timePassed: 0
   timeToMaxSpeed: 0

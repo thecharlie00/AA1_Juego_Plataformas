@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
+    public GameObject Camera;
     public float acceleration;
     public float timePassed;
     public float timeToMaxSpeed;
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour
             
         }
         Vector3 newPosition = transform.position + (transform.forward * (directionValue*speed * Time.fixedDeltaTime));
+        transform.rotation = Camera.transform.rotation;
         rb.MovePosition(newPosition);
     }
 }
