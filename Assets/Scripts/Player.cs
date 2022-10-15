@@ -5,12 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody rb;
-    public GameObject Camera;
     public float acceleration;
     public float timePassed;
     public float timeToMaxSpeed;
     public float speed;
     public float initSpeed;
+    public GameObject Target;
     [SerializeField]
     private float directionValue;
 
@@ -80,8 +80,10 @@ public class Player : MonoBehaviour
             
             
         }
-        Vector3 newPosition = transform.position + (transform.forward * (directionValue*speed * Time.fixedDeltaTime));
-        transform.rotation = Camera.transform.rotation;
+
+        Vector3 newPosition = transform.position + (transform.forward * (directionValue*speed * Time.fixedDeltaTime));  
         rb.MovePosition(newPosition);
+        Quaternion targetRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
+        rb.MoveRotation(targetRotation);
     }
 }

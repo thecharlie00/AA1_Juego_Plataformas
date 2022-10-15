@@ -4,49 +4,25 @@ using UnityEngine;
 
 public class CamaraMovement : MonoBehaviour
 {
-    Camera camera;
-    Rigidbody rb;
+    public GameObject referenceObject;
+    public float oSpeed;
     private float directionValue;
-    private float lastValue;
-    float tiltAroundz;
-    float tiltAngle = 180.0f;
-    [SerializeField]
-    private float cameraMovementSpeed;
-    private void Awake()
-    {
-        camera = GetComponent<Camera>();
-        rb = GetComponent<Rigidbody>();
-        
-    }
 
-    
-    void Update()
+   
+    private void Update()
     {
-       
-        if (InputManager._INPUT_MANAGER.rightAxisValue.x > 0)
-        {
-            directionValue = 1;
-           
-        }
         if(InputManager._INPUT_MANAGER.rightAxisValue.x < 0)
         {
-            directionValue = -1;
-        }if(InputManager._INPUT_MANAGER.rightAxisValue.x != 0)
-        {
-            lastValue = InputManager._INPUT_MANAGER.rightAxisValue.x;
+            directionValue = 1f;
         }
-        
-        Debug.Log(lastValue);
-        if(InputManager._INPUT_MANAGER.rightAxisValue.x == 0)
+        if(InputManager._INPUT_MANAGER.rightAxisValue.x > 0)
         {
-            InputManager._INPUT_MANAGER.rightAxisValue.x = lastValue;
+            directionValue = -1f;
         }
-        tiltAroundz = InputManager._INPUT_MANAGER.rightAxisValue.x * tiltAngle;
-       
-       
-
-        //Debug.Log(InputManager._INPUT_MANAGER.rightAxisValue.x);
-        Quaternion target = Quaternion.Euler(0, tiltAroundz, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * cameraMovementSpeed);
+        if (InputManager._INPUT_MANAGER.rightAxisValue.x == 0)
+        {
+            directionValue = 0;
+        }
+        transform.RotateAround(referenceObject.transform.position, new Vector3(0, 1, 0), oSpeed * Time.deltaTime*directionValue);
     }
 }

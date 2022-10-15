@@ -167,7 +167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &394044018
 GameObject:
@@ -277,7 +277,7 @@ GameObject:
   m_Layer: 0
   m_Name: Camera Movement
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -288,14 +288,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125839986}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.51, z: 7.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2102990442}
-  m_Father: {fileID: 2029533379}
-  m_RootOrder: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1125839988
 Rigidbody:
@@ -325,7 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2cad066784c7742951da9579cdc515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraMovementSpeed: 2
+  referenceObject: {fileID: 2029533374}
+  oSpeed: 20
 --- !u!1 &1811897260
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,13 +532,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029533374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.49, z: 0}
+  m_LocalPosition: {x: 0, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1125839987}
+  - {fileID: 2102990442}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2029533380
 MonoBehaviour:
@@ -552,12 +552,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e46352bc2259e4993ffa96f09c52d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 1125839986}
   acceleration: 2
   timePassed: 0
   timeToMaxSpeed: 0
   speed: 0
   initSpeed: 0
+  Target: {fileID: 1125839986}
   directionValue: 0
   maxSpeed: 20
   isMoving: 0
@@ -643,6 +643,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1125839987}
+  m_Father: {fileID: 2029533379}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
