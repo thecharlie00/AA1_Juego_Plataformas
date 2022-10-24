@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class CamaraMovement : MonoBehaviour
 {
-    public GameObject referenceObject;
-    public float oSpeed;
-    private float directionValue;
+    [SerializeField]
+    private GameObject target;
 
-   
-    private void Update()
+    [SerializeField]
+    private float targetDistance;
+
+    [SerializeField]
+    private float cameraLerp; //12f
+
+    public float rotationX;
+    public float rotationY;
+
+    private void LateUpdate()
     {
-        if(InputManager._INPUT_MANAGER.rightAxisValue.x < 0)
-        {
-            directionValue = 1f;
-        }
-        if(InputManager._INPUT_MANAGER.rightAxisValue.x > 0)
-        {
-            directionValue = -1f;
-        }
-        if (InputManager._INPUT_MANAGER.rightAxisValue.x == 0)
-        {
-            directionValue = 0;
-        }
-        transform.RotateAround(referenceObject.transform.position, new Vector3(0, 1, 0), oSpeed * Time.deltaTime*directionValue);
+        //rotationX -= InputManager._INPUT_MANAGER.rightAxisValue.y;
+        rotationY += InputManager._INPUT_MANAGER.rightAxisValue.x;
+
+        rotationX = Mathf.Clamp(rotationX, -10f, 70f);
+
+        transform.eulerAngles = new Vector3(rotationX, rotationY, 0);
+
+        transform.position = Vector3.Lerp(transform.position, target.transform.position - transform.forward * targetDistance, cameraLerp * Time.deltaTime);
+
     }
 }
