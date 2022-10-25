@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     private float timeSinceJumppPressed = 0f;
     public Vector2 leftAxisValue = Vector2.zero;
     public Vector2 rightAxisValue = Vector2.zero;
+    
 
     private void Awake()
     {
@@ -33,9 +34,10 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         timeSinceJumppPressed += Time.deltaTime;
+        
         InputSystem.Update();
     }
-    private void JumpButtonPressed(InputAction.CallbackContext context)
+    public void JumpButtonPressed(InputAction.CallbackContext context)
     {
 
         timeSinceJumppPressed = 0f;
@@ -55,9 +57,11 @@ public class InputManager : MonoBehaviour
     public bool GetSouthButtonPressed()
     {
         return this.timeSinceJumppPressed == 0f;
+       
     }
     public float TimeSinceSouthButtonPressed()
     {
         return this.timeSinceJumppPressed;
+       
     }
 }
