@@ -14,5 +14,6 @@ public class AnimationManager : MonoBehaviour
     private void Update()
     {
         animator.SetFloat("Velocity", _player.GetCurrentSpeed());
+        animator.SetFloat("Altitude", _player.GetCurrentJump());
     }
 }

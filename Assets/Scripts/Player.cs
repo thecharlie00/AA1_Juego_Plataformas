@@ -24,22 +24,32 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isGrounded;
     public float jumpForce;
+    public float jumpCount;
     private Vector3 jump;
     #endregion
-
+    #region Animaciones
+    Animator animator;
+    #endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0, 2.0f, 0);
+        
     }
     private void Update()
     {
-        if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && isGrounded)
+        if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && isGrounded )
         {
 
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+          
+            
+        }if(InputManager._INPUT_MANAGER.GetSouthButtonPressed()&& !isGrounded && jumpCount <= 2)
+        {
+            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+            jumpCount++;
         }
-
+        
 
 
         if (InputManager._INPUT_MANAGER.leftAxisValue.y > 0)
@@ -107,6 +117,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            jumpCount = 0;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -120,6 +131,9 @@ public class Player : MonoBehaviour
     {
         return this.speed;
     }
-
+    public float GetCurrentJump()
+    {
+        return this.transform.position.y;
+    }
 
 }

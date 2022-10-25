@@ -23,8 +23,10 @@ public class CamaraMovement : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, rotationY, 0);
 
-        Vector3 finalPosition = Vector3.Lerp(transform.position, target.transform.position -
-        transform.forward * targetDistance, cameraLerp * Time.deltaTime);
+        /*Vector3 finalPosition = Vector3.Lerp(transform.position, target.transform.position -
+        transform.forward * targetDistance, cameraLerp * Time.deltaTime);*/
+        Vector3 finalPosition = target.transform.position -
+        transform.forward * targetDistance;
         RaycastHit hit;
         if (Physics.Linecast(target.transform.position, finalPosition, out hit))
         {
