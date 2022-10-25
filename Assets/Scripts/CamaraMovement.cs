@@ -21,9 +21,9 @@ public class CamaraMovement : MonoBehaviour
         //rotationX -= InputManager._INPUT_MANAGER.rightAxisValue.y;
         rotationY += InputManager._INPUT_MANAGER.rightAxisValue.x;
 
-        rotationX = Mathf.Clamp(rotationX, -10f, 70f);
+        
 
-        transform.eulerAngles = new Vector3(rotationX, rotationY, 0);
+        transform.eulerAngles = new Vector3(0, rotationY, 0);
 
         transform.position = Vector3.Lerp(transform.position, target.transform.position - transform.forward * targetDistance, cameraLerp * Time.deltaTime);
 
