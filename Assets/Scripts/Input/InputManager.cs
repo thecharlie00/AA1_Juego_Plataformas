@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class InputManager : MonoBehaviour
 {
     private Player_Inputs playerInputs;
     public static InputManager _INPUT_MANAGER;
     private float timeSinceJumppPressed = 0f;
+    //private float timeSinceCrouchPressed = 0f;
     public Vector2 leftAxisValue = Vector2.zero;
     public Vector2 rightAxisValue = Vector2.zero;
+    public float isCrouching;
     
 
     private void Awake()
@@ -26,14 +29,21 @@ public class InputManager : MonoBehaviour
             playerInputs.Player.Jump.performed += JumpButtonPressed;
             playerInputs.Player.Move.performed += LeftAxisUpdate;
             playerInputs.Player.CameraMove.performed += RightAxisUpdate;
+            playerInputs.Player.CrouchStart.performed += x =>CrouchPressed();
+            playerInputs.Player.CrouchEnd.performed += x => CrouchReleased();
+
+
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(this);
         }
 
     }
+   
     private void Update()
     {
+        
         timeSinceJumppPressed += Time.deltaTime;
+        Debug.Log(isCrouching);
         
         InputSystem.Update();
     }
@@ -41,6 +51,15 @@ public class InputManager : MonoBehaviour
     {
 
         timeSinceJumppPressed = 0f;
+       
+    }
+    private void CrouchPressed()
+    {
+        isCrouching = 1;
+    }
+    private void CrouchReleased()
+    {
+        isCrouching = 0;
     }
     private void LeftAxisUpdate(InputAction.CallbackContext context)
     {
@@ -54,6 +73,8 @@ public class InputManager : MonoBehaviour
         Debug.Log("Magnitude" + leftAxisValue.magnitude);
         Debug.Log("Magnitude" + leftAxisValue.normalized);
     }
+    
+   
     public bool GetSouthButtonPressed()
     {
         return this.timeSinceJumppPressed == 0f;

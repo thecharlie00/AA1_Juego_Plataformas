@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
     #region Animaciones
     Animator animator;
     #endregion
+    #region Agacharse
+    [SerializeField]
+    private bool isCrouching;
+    #endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,79 +42,90 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && isGrounded )
+        if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && isGrounded)
         {
 
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
-          
-            
-        }if(InputManager._INPUT_MANAGER.GetSouthButtonPressed()&& !isGrounded && jumpCount <= 2)
+
+
+        }
+        if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && !isGrounded && jumpCount <= 2)
         {
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
             jumpCount++;
         }
-        
 
+        if (InputManager._INPUT_MANAGER.isCrouching == 0)
+        {
 
-        if (InputManager._INPUT_MANAGER.leftAxisValue.y > 0)
-        {
-            isMoving = true;
-            timePassed += Time.deltaTime;
-            speed = acceleration * timePassed / Time.deltaTime;
-            directionValue = 1;
+            isCrouching = false;
 
-            speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
-            if (speed == maxSpeed)
+            if (InputManager._INPUT_MANAGER.leftAxisValue.y > 0)
             {
-                speed = maxSpeed;
-            }
-            
-        }
-        if(InputManager._INPUT_MANAGER.leftAxisValue.y < 0)
-        {
-            isMoving = true;
-            directionValue = -1;
-            timePassed += Time.deltaTime;
-            speed = acceleration * timePassed / Time.deltaTime;
-            speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
-            if (speed == maxSpeed)
-            {
-                speed = maxSpeed;
-            }
-           
-        }
-        if (InputManager._INPUT_MANAGER.leftAxisValue.y <= 0)
-        {
-            isMoving = false;
-        }
-        if (!isMoving && speed >0)
-        {
-            
-                speed-=Time.deltaTime*10;
-            if(directionValue == 1)
-            {
+                isMoving = true;
+                timePassed += Time.deltaTime;
+                speed = acceleration * timePassed / Time.deltaTime;
                 directionValue = 1;
-            }
-            
 
-            if (directionValue == -1)
+                speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
+                if (speed == maxSpeed)
+                {
+                    speed = maxSpeed;
+                }
+
+            }
+            if (InputManager._INPUT_MANAGER.leftAxisValue.y < 0)
             {
+                isMoving = true;
                 directionValue = -1;
+                timePassed += Time.deltaTime;
+                speed = acceleration * timePassed / Time.deltaTime;
+                speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
+                if (speed == maxSpeed)
+                {
+                    speed = maxSpeed;
+                }
+
             }
-            if(speed <= 0)
+            if (InputManager._INPUT_MANAGER.leftAxisValue.y <= 0)
             {
-                speed = 0;
-                timePassed = 0;
+                isMoving = false;
             }
-            
-            
+            if (!isMoving && speed > 0)
+            {
+
+                speed -= Time.deltaTime * 10;
+                if (directionValue == 1)
+                {
+                    directionValue = 1;
+                }
+
+
+                if (directionValue == -1)
+                {
+                    directionValue = -1;
+                }
+                if (speed <= 0)
+                {
+                    speed = 0;
+                    timePassed = 0;
+                }
+
+
+            }
+
+            Vector3 newPosition = transform.position + (transform.forward * (directionValue * speed * Time.fixedDeltaTime));
+            rb.MovePosition(newPosition);
+            transform.rotation = camera.transform.rotation;
         }
-
-        Vector3 newPosition = transform.position + (transform.forward * (directionValue*speed * Time.fixedDeltaTime));  
-        rb.MovePosition(newPosition);
-        transform.rotation = camera.transform.rotation;
+        if (InputManager._INPUT_MANAGER.isCrouching == 1)
+        {
+            isCrouching = true;
+            Vector3 newPosition = transform.position + (transform.forward * (directionValue * speed * Time.fixedDeltaTime)/2);
+            rb.MovePosition(newPosition);
+            transform.rotation = camera.transform.rotation;
+        }
     }
-
 
     private void OnCollisionStay(Collision collision)
     {
@@ -134,6 +149,10 @@ public class Player : MonoBehaviour
     public float GetCurrentJump()
     {
         return this.transform.position.y;
+    }
+    public float GetCrouch()
+    {
+        return InputManager._INPUT_MANAGER.isCrouching;
     }
 
 }

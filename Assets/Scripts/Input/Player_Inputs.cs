@@ -53,6 +53,24 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CrouchStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""b038050f-b76c-4ce0-bb3e-d7ba40f01fed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CrouchEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0979df9-91b4-48cc-9296-599c00328a3c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +172,50 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""CameraMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6de54255-b68e-4bc2-872d-87ac0c559021"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrouchStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1120021c-9ee4-4d85-9799-4956a5d72baf"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrouchStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f4fb08d-c613-4c03-a46d-7624874e5c66"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrouchEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""306cec0e-a1b0-4ac5-8741-633cba79ba1a"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrouchEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +227,8 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
+        m_Player_CrouchStart = m_Player.FindAction("CrouchStart", throwIfNotFound: true);
+        m_Player_CrouchEnd = m_Player.FindAction("CrouchEnd", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +291,8 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_CameraMove;
+    private readonly InputAction m_Player_CrouchStart;
+    private readonly InputAction m_Player_CrouchEnd;
     public struct PlayerActions
     {
         private @Player_Inputs m_Wrapper;
@@ -234,6 +300,8 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
+        public InputAction @CrouchStart => m_Wrapper.m_Player_CrouchStart;
+        public InputAction @CrouchEnd => m_Wrapper.m_Player_CrouchEnd;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -252,6 +320,12 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                 @CameraMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraMove;
                 @CameraMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraMove;
                 @CameraMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCameraMove;
+                @CrouchStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchStart;
+                @CrouchStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchStart;
+                @CrouchStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchStart;
+                @CrouchEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchEnd;
+                @CrouchEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchEnd;
+                @CrouchEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchEnd;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -265,6 +339,12 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                 @CameraMove.started += instance.OnCameraMove;
                 @CameraMove.performed += instance.OnCameraMove;
                 @CameraMove.canceled += instance.OnCameraMove;
+                @CrouchStart.started += instance.OnCrouchStart;
+                @CrouchStart.performed += instance.OnCrouchStart;
+                @CrouchStart.canceled += instance.OnCrouchStart;
+                @CrouchEnd.started += instance.OnCrouchEnd;
+                @CrouchEnd.performed += instance.OnCrouchEnd;
+                @CrouchEnd.canceled += instance.OnCrouchEnd;
             }
         }
     }
@@ -274,5 +354,7 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
+        void OnCrouchStart(InputAction.CallbackContext context);
+        void OnCrouchEnd(InputAction.CallbackContext context);
     }
 }
