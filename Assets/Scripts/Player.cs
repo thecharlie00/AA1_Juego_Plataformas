@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     public float jumpForce;
     public float jumpCount;
+    public float forwardSpeed;
     private Vector3 jump;
     #endregion
     #region Animaciones
@@ -208,5 +209,19 @@ public class Player : MonoBehaviour
     {
         return InputManager._INPUT_MANAGER.isCrouching;
     }
-
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        WallJump(hit);
+    }
+    void WallJump(ControllerColliderHit hitSent)
+    {
+        if(!isGrounded && hitSent.normal.y < 0.1f)
+        {
+            if ((InputManager._INPUT_MANAGER.GetSouthButtonPressed())){
+                transform.forward = hitSent.normal;
+                transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
+                rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+            }
+        }
+    }
 }
