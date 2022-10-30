@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
     {
         
         timeSinceJumppPressed += Time.deltaTime;
-        Debug.Log(isCrouching);
+      
         
         InputSystem.Update();
     }

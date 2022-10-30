@@ -121,7 +121,61 @@ public class Player : MonoBehaviour
         if (InputManager._INPUT_MANAGER.isCrouching == 1)
         {
             isCrouching = true;
-            Vector3 newPosition = transform.position + (transform.forward * (directionValue * speed * Time.fixedDeltaTime)/2);
+            if (InputManager._INPUT_MANAGER.leftAxisValue.y > 0)
+            {
+                isMoving = true;
+                timePassed += Time.deltaTime;
+                speed = acceleration * timePassed / Time.deltaTime;
+                directionValue = 1;
+
+                speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
+                if (speed == maxSpeed)
+                {
+                    speed = maxSpeed;
+                }
+
+            }
+            if (InputManager._INPUT_MANAGER.leftAxisValue.y < 0)
+            {
+                isMoving = true;
+                directionValue = -1;
+                timePassed += Time.deltaTime;
+                speed = acceleration * timePassed / Time.deltaTime;
+                speed = Mathf.Clamp(initSpeed, maxSpeed, 0);
+                if (speed == maxSpeed)
+                {
+                    speed = maxSpeed;
+                }
+
+            }
+            if (InputManager._INPUT_MANAGER.leftAxisValue.y <= 0)
+            {
+                isMoving = false;
+            }
+            if (!isMoving && speed > 0)
+            {
+
+                speed -= Time.deltaTime * 10;
+                if (directionValue == 1)
+                {
+                    directionValue = 1;
+                }
+
+
+                if (directionValue == -1)
+                {
+                    directionValue = -1;
+                }
+                if (speed <= 0)
+                {
+                    speed = 0;
+                    timePassed = 0;
+                }
+
+
+            }
+
+            Vector3 newPosition = transform.position + (transform.forward * (directionValue * speed/2 * Time.fixedDeltaTime));
             rb.MovePosition(newPosition);
             transform.rotation = camera.transform.rotation;
         }
