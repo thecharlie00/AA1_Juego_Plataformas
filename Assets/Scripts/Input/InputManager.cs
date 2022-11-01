@@ -12,8 +12,10 @@ public class InputManager : MonoBehaviour
     //private float timeSinceCrouchPressed = 0f;
     public Vector2 leftAxisValue = Vector2.zero;
     public Vector2 rightAxisValue = Vector2.zero;
+    public Vector2 mousePosition = Vector2.zero;
     public float isCrouching;
-    
+    public float timeSinceThrowCappy;
+
 
     private void Awake()
     {
@@ -27,11 +29,13 @@ public class InputManager : MonoBehaviour
             playerInputs = new Player_Inputs();
             playerInputs.Player.Enable();
             playerInputs.Player.Jump.performed += JumpButtonPressed;
+            playerInputs.Player.ThrowCappy.performed += ThrowButtonPressed;
             playerInputs.Player.Move.performed += LeftAxisUpdate;
             playerInputs.Player.CameraMove.performed += RightAxisUpdate;
+            playerInputs.Player.CameraMove.performed += MousePositionUpdate;
             playerInputs.Player.CrouchStart.performed += x =>CrouchPressed();
             playerInputs.Player.CrouchEnd.performed += x => CrouchReleased();
-
+           
 
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(this);
@@ -43,8 +47,9 @@ public class InputManager : MonoBehaviour
     {
         
         timeSinceJumppPressed += Time.deltaTime;
-      
-        
+        timeSinceThrowCappy += Time.deltaTime;
+        Debug.Log(timeSinceThrowCappy);
+
         InputSystem.Update();
     }
     public void JumpButtonPressed(InputAction.CallbackContext context)
@@ -61,17 +66,25 @@ public class InputManager : MonoBehaviour
     {
         isCrouching = 0;
     }
+    public void ThrowButtonPressed(InputAction.CallbackContext context)
+    {
+        timeSinceThrowCappy = 0f;
+        
+    }
     private void LeftAxisUpdate(InputAction.CallbackContext context)
     {
         leftAxisValue = context.ReadValue<Vector2>();
-        Debug.Log("Magnitude" + leftAxisValue.magnitude);
-        Debug.Log("Magnitude" + leftAxisValue.normalized);
+       
     }
     private void RightAxisUpdate(InputAction.CallbackContext context)
     {
         rightAxisValue = context.ReadValue<Vector2>();
-        Debug.Log("Magnitude" + leftAxisValue.magnitude);
-        Debug.Log("Magnitude" + leftAxisValue.normalized);
+       
+    }
+    private void MousePositionUpdate(InputAction.CallbackContext context)
+    {
+        mousePosition = context.ReadValue<Vector2>();
+        
     }
     
    
@@ -79,6 +92,10 @@ public class InputManager : MonoBehaviour
     {
         return this.timeSinceJumppPressed == 0f;
        
+    }
+    public bool GetThrowButtonPressed()
+    {
+        return this.timeSinceThrowCappy == 0f;
     }
     public float TimeSinceSouthButtonPressed()
     {

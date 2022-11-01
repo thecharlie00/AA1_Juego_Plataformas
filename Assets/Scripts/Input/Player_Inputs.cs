@@ -71,6 +71,15 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowCappy"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4db61d6-bd17-4aa2-bce9-458196dfa0b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -175,6 +184,17 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""84d0a3be-8c29-4f3b-8231-7d599cf9b1da"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6de54255-b68e-4bc2-872d-87ac0c559021"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": ""Press"",
@@ -216,6 +236,28 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""CrouchEnd"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0c6c382-3bd3-4c94-9b45-2e7ef2762e9f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowCappy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99254065-36b1-4d44-8699-4fff18c32fd6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowCappy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -229,6 +271,7 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
         m_Player_CameraMove = m_Player.FindAction("CameraMove", throwIfNotFound: true);
         m_Player_CrouchStart = m_Player.FindAction("CrouchStart", throwIfNotFound: true);
         m_Player_CrouchEnd = m_Player.FindAction("CrouchEnd", throwIfNotFound: true);
+        m_Player_ThrowCappy = m_Player.FindAction("ThrowCappy", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +336,7 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraMove;
     private readonly InputAction m_Player_CrouchStart;
     private readonly InputAction m_Player_CrouchEnd;
+    private readonly InputAction m_Player_ThrowCappy;
     public struct PlayerActions
     {
         private @Player_Inputs m_Wrapper;
@@ -302,6 +346,7 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
         public InputAction @CameraMove => m_Wrapper.m_Player_CameraMove;
         public InputAction @CrouchStart => m_Wrapper.m_Player_CrouchStart;
         public InputAction @CrouchEnd => m_Wrapper.m_Player_CrouchEnd;
+        public InputAction @ThrowCappy => m_Wrapper.m_Player_ThrowCappy;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,6 +371,9 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                 @CrouchEnd.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchEnd;
                 @CrouchEnd.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchEnd;
                 @CrouchEnd.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouchEnd;
+                @ThrowCappy.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowCappy;
+                @ThrowCappy.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowCappy;
+                @ThrowCappy.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowCappy;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -345,6 +393,9 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
                 @CrouchEnd.started += instance.OnCrouchEnd;
                 @CrouchEnd.performed += instance.OnCrouchEnd;
                 @CrouchEnd.canceled += instance.OnCrouchEnd;
+                @ThrowCappy.started += instance.OnThrowCappy;
+                @ThrowCappy.performed += instance.OnThrowCappy;
+                @ThrowCappy.canceled += instance.OnThrowCappy;
             }
         }
     }
@@ -356,5 +407,6 @@ public partial class @Player_Inputs : IInputActionCollection2, IDisposable
         void OnCameraMove(InputAction.CallbackContext context);
         void OnCrouchStart(InputAction.CallbackContext context);
         void OnCrouchEnd(InputAction.CallbackContext context);
+        void OnThrowCappy(InputAction.CallbackContext context);
     }
 }

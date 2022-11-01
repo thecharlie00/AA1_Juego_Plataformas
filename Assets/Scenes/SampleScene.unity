@@ -251,7 +251,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAxisValue: {x: 0, y: 0}
   rightAxisValue: {x: 0, y: 0}
+  mousePosition: {x: 0, y: 0}
   isCrouching: 0
+  timeSinceThrowCappy: 0
 --- !u!4 &169114853
 Transform:
   m_ObjectHideFlags: 0
@@ -361,6 +363,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &1095610190 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6621179900387230800, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
+  m_PrefabInstance: {fileID: 1841874066740231481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1811897260
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +583,6 @@ MonoBehaviour:
   target: {fileID: 9019515341924582200}
   targetDistance: 4
   cameraLerp: 12
-  rotationX: 0
   rotationY: 0
 --- !u!95 &2102990444
 Animator:
@@ -610,6 +616,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
+      propertyPath: cappy
+      value: 
+      objectReference: {fileID: 8903111998856070988, guid: d2023ddbcff5c954e991bff75b97b0e1, type: 3}
+    - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 2102990439}
@@ -621,6 +631,10 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1095610190}
     - target: {fileID: 2163170145774368237, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
       propertyPath: m_RootOrder
       value: 1

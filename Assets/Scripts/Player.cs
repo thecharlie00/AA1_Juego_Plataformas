@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isGrounded;
     public float jumpForce;
+    public float wallJumpForce;
     public float jumpCount;
     public float forwardSpeed;
     private Vector3 jump;
@@ -35,6 +36,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool isCrouching;
     #endregion
+    #region Cappy
+    public GameObject cappy;
+    public Transform spawnPoint;
+    #endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,6 +48,10 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        if (InputManager._INPUT_MANAGER.GetThrowButtonPressed())
+        {
+            Instantiate(cappy, spawnPoint.position, spawnPoint.rotation);
+        }
         if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && isGrounded)
         {
 
@@ -220,7 +229,7 @@ public class Player : MonoBehaviour
             if ((InputManager._INPUT_MANAGER.GetSouthButtonPressed())){
                 transform.forward = hitSent.normal;
                 transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
-                rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+                rb.AddForce(jump * wallJumpForce, ForceMode.Force);
             }
         }
     }
