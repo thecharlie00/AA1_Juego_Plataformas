@@ -102,4 +102,8 @@ public class InputManager : MonoBehaviour
         return this.timeSinceJumppPressed;
        
     }
+    public float TimeSinceThrowPressed()
+    {
+        return this.timeSinceThrowCappy;
+    }
 }

@@ -15,6 +15,7 @@ public class AnimationManager : MonoBehaviour
     {
         animator.SetFloat("Velocity", _player.GetCurrentSpeed());
         animator.SetFloat("HasJumped", InputManager._INPUT_MANAGER.TimeSinceSouthButtonPressed());
+        animator.SetFloat("HasThrowed", InputManager._INPUT_MANAGER.TimeSinceThrowPressed());
         animator.SetFloat("Crouch",_player.GetCrouch());
     }
 }

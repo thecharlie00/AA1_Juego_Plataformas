@@ -368,6 +368,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6621179900387230800, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
   m_PrefabInstance: {fileID: 1841874066740231481}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1548915251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1548915253}
+  - component: {fileID: 1548915252}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1548915252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548915251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa712819f1c1a3b4497335799b692596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetCappy: 0
+--- !u!4 &1548915253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548915251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.1220875, y: 2.094605, z: -0.3631277}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811897260
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,12 +669,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2102990439}
     - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
+      propertyPath: _cappy
+      value: 
+      objectReference: {fileID: -287820777314043080, guid: d2023ddbcff5c954e991bff75b97b0e1, type: 3}
+    - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 2102990441}
     - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
       propertyPath: jumpForce
-      value: 5
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
+      propertyPath: cappyForce
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1841874064975785107, guid: db046b69f5475d2469a9b2f023c7a379, type: 3}
       propertyPath: spawnPoint

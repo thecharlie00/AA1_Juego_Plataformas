@@ -7,6 +7,8 @@ public class Cappy : MonoBehaviour
     public float velocity;
     public float movingTime;
     public float time;
+    public bool reset;
+   
     void Start()
     {
         
@@ -26,6 +28,9 @@ public class Cappy : MonoBehaviour
         if(velocity == 0)
         {
             Destroy(this.gameObject, 8f);
+            time = 0;
+            GameManager._GAME_MANAGER.ResetCappy(true);
+           
         }
     }
 }

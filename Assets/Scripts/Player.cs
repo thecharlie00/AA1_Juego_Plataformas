@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     #region Cappy
     public GameObject cappy;
     public Transform spawnPoint;
+    public float cappyForce;
+    
     #endregion
     private void Awake()
     {
@@ -48,8 +50,12 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        if (InputManager._INPUT_MANAGER.GetThrowButtonPressed())
+       
+            
+        
+        if (InputManager._INPUT_MANAGER.GetThrowButtonPressed() && GameManager._GAME_MANAGER.resetCappy==true)
         {
+            GameManager._GAME_MANAGER.ResetCappy(false);
             Instantiate(cappy, spawnPoint.position, spawnPoint.rotation);
         }
         if (InputManager._INPUT_MANAGER.GetSouthButtonPressed() && isGrounded)
@@ -204,6 +210,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Cappy")
+        {
+            rb.AddForce(jump * cappyForce, ForceMode.Impulse);
         }
     }
     public float GetCurrentSpeed()
