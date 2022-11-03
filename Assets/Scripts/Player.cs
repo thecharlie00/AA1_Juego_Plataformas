@@ -46,7 +46,10 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0, 2.0f, 0);
-        
+        Target = GameObject.FindGameObjectWithTag("MainCamera");
+        camera = FindObjectOfType<Camera>();
+
+
     }
     private void Update()
     {
@@ -217,6 +220,15 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Cappy")
         {
             rb.AddForce(jump * cappyForce, ForceMode.Impulse);
+        }
+        if (collision.gameObject.tag == "BouncePlatform")
+        {
+            rb.AddForce(jump * cappyForce, ForceMode.Impulse);
+        }
+        if(collision.gameObject.tag == "Spikes")
+        {
+            Destroy(this.gameObject);
+            GameManager._GAME_MANAGER.PlayerDead(true);
         }
     }
     public float GetCurrentSpeed()

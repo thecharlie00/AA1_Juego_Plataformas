@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager _GAME_MANAGER;
     public bool resetCappy;
+    public bool isDead;
 
     private void Awake()
     {
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        resetCappy = true;   
+        resetCappy = true;
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -33,5 +35,10 @@ public class GameManager : MonoBehaviour
     public void ResetCappy(bool reset)
     {
         resetCappy = reset;
+    }
+
+    public void PlayerDead(bool dead)
+    {
+        isDead = dead;
     }
 }

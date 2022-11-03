@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8873317834982369013}
   - component: {fileID: 6336186245271135623}
   - component: {fileID: 1566108771569829741}
-  - component: {fileID: 8356977431740077911}
   - component: {fileID: -287820777314043080}
+  - component: {fileID: 9197355140979632528}
   m_Layer: 0
   m_Name: Torty
   m_TagString: Cappy
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8356977431740077911
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8903111998856070988}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.50858676
-  m_Center: {x: 0.003785056, y: -0.66948706, z: 0}
 --- !u!114 &-287820777314043080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,3 +100,17 @@ MonoBehaviour:
   velocity: 5
   movingTime: 5
   time: 0
+  reset: 0
+--- !u!65 &9197355140979632528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8903111998856070988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
