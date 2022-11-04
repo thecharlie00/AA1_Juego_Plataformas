@@ -53,9 +53,12 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-       
-            
-        
+
+
+        if (GameManager._GAME_MANAGER.isDestroyed == true)
+        {
+            GameManager._GAME_MANAGER.ResetCappy(true);
+        }
         if (InputManager._INPUT_MANAGER.GetThrowButtonPressed() && GameManager._GAME_MANAGER.resetCappy==true)
         {
             GameManager._GAME_MANAGER.ResetCappy(false);

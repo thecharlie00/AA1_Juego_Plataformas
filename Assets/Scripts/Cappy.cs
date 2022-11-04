@@ -27,10 +27,12 @@ public class Cappy : MonoBehaviour
         }
         if(velocity == 0)
         {
+           
             Destroy(this.gameObject, 8f);
             time = 0;
-            GameManager._GAME_MANAGER.ResetCappy(true);
+            
            
         }
+        
     }
 }

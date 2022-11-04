@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager _GAME_MANAGER;
     public bool resetCappy;
     public bool isDead;
+    public bool isDestroyed;
+    public GameObject _cappy;
 
     private void Awake()
     {
@@ -28,15 +30,16 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    /*void Update()
+    void Update()
     {
-        
-    }*/
+        _cappy = GameObject.FindGameObjectWithTag("Cappy");
+        if(_cappy == null){ isDestroyed = true; }
+        else { isDestroyed = false; }
+    }
     public void ResetCappy(bool reset)
     {
         resetCappy = reset;
     }
-
     public void PlayerDead(bool dead)
     {
         isDead = dead;
