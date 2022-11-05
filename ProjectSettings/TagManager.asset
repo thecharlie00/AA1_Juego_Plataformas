@@ -9,6 +9,7 @@ TagManager:
   - BouncePlatform
   - Spikes
   - Target
+  - Coin
   layers:
   - Default
   - TransparentFX

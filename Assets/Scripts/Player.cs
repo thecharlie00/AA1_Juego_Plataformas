@@ -40,8 +40,9 @@ public class Player : MonoBehaviour
     public GameObject cappy;
     public Transform spawnPoint;
     public float cappyForce;
-    
+
     #endregion
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -232,6 +233,10 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
             GameManager._GAME_MANAGER.PlayerDead(true);
+        }
+        if(collision.gameObject.tag == "Coin")
+        {
+            GameManager._GAME_MANAGER.sumCoins();
         }
     }
     public float GetCurrentSpeed()

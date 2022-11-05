@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour
     public bool isDead;
     public bool isDestroyed;
     public GameObject _cappy;
+    public GameObject[] coins;
+    public float numCoins;
+    
 
     private void Awake()
     {
@@ -27,6 +31,8 @@ public class GameManager : MonoBehaviour
     {
         resetCappy = true;
         isDead = false;
+        coins = GameObject.FindGameObjectsWithTag("Coin");
+        
     }
 
     // Update is called once per frame
@@ -35,6 +41,11 @@ public class GameManager : MonoBehaviour
         _cappy = GameObject.FindGameObjectWithTag("Cappy");
         if(_cappy == null){ isDestroyed = true; }
         else { isDestroyed = false; }
+        if(numCoins == coins.Length)
+        {
+            SceneManager.LoadScene("Win");
+        }
+        
     }
     public void ResetCappy(bool reset)
     {
@@ -43,5 +54,13 @@ public class GameManager : MonoBehaviour
     public void PlayerDead(bool dead)
     {
         isDead = dead;
+    }
+    public void sumCoins()
+    {
+        numCoins++;
+    }
+    public void LoadSceneGame()
+    {
+        SceneManager.LoadScene("complete_track_demo");
     }
 }

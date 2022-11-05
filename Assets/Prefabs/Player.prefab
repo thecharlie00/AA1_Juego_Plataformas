@@ -488,14 +488,14 @@ MonoBehaviour:
   goingBackwards: 0
   Target: {fileID: 0}
   isGrounded: 0
-  jumpForce: 0
-  wallJumpForce: 0
+  jumpForce: 5
+  wallJumpForce: 5
   jumpCount: 0
   forwardSpeed: 0
   isCrouching: 0
   cappy: {fileID: 8903111998856070988, guid: d2023ddbcff5c954e991bff75b97b0e1, type: 3}
   spawnPoint: {fileID: 6621179900387230800}
-  cappyForce: 0
+  cappyForce: 10
 --- !u!114 &-1223789962738773961
 MonoBehaviour:
   m_ObjectHideFlags: 0
