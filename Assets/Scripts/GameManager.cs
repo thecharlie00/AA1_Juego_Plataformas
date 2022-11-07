@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
         _cappy = GameObject.FindGameObjectWithTag("Cappy");
         if(_cappy == null){ isDestroyed = true; }
         else { isDestroyed = false; }
-        if(numCoins == coins.Length)
+        if(numCoins == coins.Length && sceneName != "Win")
         {
             SceneManager.LoadScene("Win");
         }
